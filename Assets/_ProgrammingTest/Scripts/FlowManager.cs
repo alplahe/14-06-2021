@@ -1,9 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public enum SceneToLoad
+{
+  Init,
+  Menu,
+  InGame
+}
 
 public class FlowManager : MonoBehaviour
 {
+  SceneToLoad sceneToLoad;
+
+  #region Singleton
   private static FlowManager instance;
 
   public static FlowManager Instance 
@@ -28,6 +39,7 @@ public class FlowManager : MonoBehaviour
       DontDestroyOnLoad(instance);
     }
   }
+  #endregion
 
   void Start()
   {
@@ -37,15 +49,21 @@ public class FlowManager : MonoBehaviour
   void GotoInit()
   {
     // TODO: Load Init Scene
+    sceneToLoad = SceneToLoad.Init;
+    SceneManager.LoadScene("LoadingScreen");
   }
 
   void GotoMenu()
   {
     // TODO: Load Menu Scene
+    sceneToLoad = SceneToLoad.Menu;
+    SceneManager.LoadScene("LoadingScreen");
   }
 
   void GotoInGame()
   {
     // TODO: Load InGame Scene
+    sceneToLoad = SceneToLoad.InGame;
+    SceneManager.LoadScene("LoadingScreen");
   }
 }
