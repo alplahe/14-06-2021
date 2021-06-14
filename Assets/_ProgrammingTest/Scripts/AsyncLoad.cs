@@ -1,18 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AsyncLoad : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+  int counter = 0;
+  FlowManager flowManager;
+  SceneToLoad sceneToLoad;
+
+  private void Start()
+  {
+    Init();
+  }
+
+  public void Init()
+  {
+    FlowManager flowManager = FlowManager.Instance.GetComponent<FlowManager>();
+    if(flowManager != null)
     {
-        
+      sceneToLoad = flowManager.sceneToLoad;
     }
 
-    // Update is called once per frame
-    void Update()
+    LoadScene();
+  }
+
+  private void Update()
+  {
+    ShowCounterInLog();
+  }
+
+  void ShowCounterInLog()
+  {
+    Debug.Log("Counter: " + counter);
+    counter++;
+  }
+
+  void LoadScene()
+  {
+    if (!CheckScene(sceneToLoad.ToString())) return;
+
+    SceneManager.LoadSceneAsync(sceneToLoad.ToString());
+  }
+
+  bool CheckScene(string sceneName)
+  {
+    for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
     {
-        
+      if (sceneName == GetSceneNameFromBuildIndex(i))
+        return true;
     }
+    return false;
+  }
+
+  string GetSceneNameFromBuildIndex(int buildIndex)
+  {
+    string path = SceneUtility.GetScenePathByBuildIndex(buildIndex);
+    int slash = path.LastIndexOf('/');
+    string name = path.Substring(slash + 1);
+    int dot = name.LastIndexOf('.');
+    return name.Substring(0, dot);
+  }
 }

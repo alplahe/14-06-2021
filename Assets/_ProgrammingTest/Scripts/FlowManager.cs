@@ -12,7 +12,7 @@ public enum SceneToLoad
 
 public class FlowManager : MonoBehaviour
 {
-  SceneToLoad sceneToLoad;
+  public SceneToLoad sceneToLoad;
 
   #region Singleton
   private static FlowManager instance;
@@ -48,22 +48,25 @@ public class FlowManager : MonoBehaviour
 
   void GotoInit()
   {
-    // TODO: Load Init Scene
     sceneToLoad = SceneToLoad.Init;
-    SceneManager.LoadScene("LoadingScreen");
+    LoadLoadingScreenScene();
   }
 
   void GotoMenu()
   {
-    // TODO: Load Menu Scene
     sceneToLoad = SceneToLoad.Menu;
-    SceneManager.LoadScene("LoadingScreen");
+    LoadLoadingScreenScene();
   }
 
   void GotoInGame()
   {
-    // TODO: Load InGame Scene
     sceneToLoad = SceneToLoad.InGame;
+    LoadLoadingScreenScene();
+  }
+
+  void LoadLoadingScreenScene()
+  {
+    Debug.Log("LoadLoadingScreenScene");
     SceneManager.LoadScene("LoadingScreen");
   }
 }
