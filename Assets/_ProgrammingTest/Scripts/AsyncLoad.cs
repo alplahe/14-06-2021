@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,6 +41,7 @@ public class AsyncLoad : MonoBehaviour
   {
     if (!CheckScene(sceneToLoad.ToString())) return;
 
+    GC.Collect();
     SceneManager.LoadSceneAsync(sceneToLoad.ToString());
   }
 
