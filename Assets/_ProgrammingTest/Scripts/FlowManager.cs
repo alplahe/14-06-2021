@@ -28,4 +28,24 @@ public class FlowManager : MonoBehaviour
       DontDestroyOnLoad(instance);
     }
   }
+
+  void Start()
+  {
+    GotoMenu();
+  }
+
+  void GotoInit()
+  {
+    // TODO: Load Init Scene
+  }
+
+  void GotoMenu()
+  {
+    // TODO: Load Menu Scene
+  }
+
+  void GotoInGame()
+  {
+    // TODO: Load InGame Scene
+  }
 }
